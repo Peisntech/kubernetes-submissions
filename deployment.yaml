@@ -1,18 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: log-output-dep
+  name: todo-app-dep
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: log-output
+      app: todo-app
   template:
     metadata:
       labels:
-        app: log-output
+        app: todo-app
     spec:
       containers:
-      - name: log-output
-        image: log-output:latest
-        imagePullPolicy: Never
+        - name: todo-app
+          image: peisntech/todo-app:1.2
+          env:
+            - name: PORT
+              value: "3000"
+          ports:
+            - containerPort: 3000
